@@ -10,7 +10,7 @@ const Convert = ({ language, text }) => {
         const timerId = setTimeout(() => {
             setDebouncedText(text);
         }, 500);
-        return () => {
+        return () => {  
             clearTimeout(timerId);
         }
     }, [text]);
