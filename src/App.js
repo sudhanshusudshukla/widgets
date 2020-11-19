@@ -3,6 +3,8 @@ import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
+import Route from './components/Route';
+import Header from './components/Header';
 
 const items = [
     {
@@ -20,43 +22,59 @@ const items = [
 
 ];
 
-// const options = [
-//     {
-//         label: 'The color Red',
-//         value: 'Red'
-//     },
-//     {
-//         label: 'The color Blue',
-//         value: 'Blue'
-//     },
-//     {
-//         label: 'The color Black',
-//         value: 'Black'
-//     },
-//     {
-//         label: 'The color Yellow',
-//         value: 'Yellow'
-//     },
-// ];
+const options = [
+    {
+        label: 'The color Red',
+        value: 'Red'
+    },
+    {
+        label: 'The color Blue',
+        value: 'Blue'
+    },
+    {
+        label: 'The color Black',
+        value: 'Black'
+    },
+    {
+        label: 'The color Yellow',
+        value: 'Yellow'
+    },
+];
 
+
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-    // const [selected, setSelected] = useState(options[0]);
-    // const [showDropdown, setShowDropdown] = useState(true);
-    return (
-        <div>
-            {/* <Accordion items={items} /> */}
-            {/* <Search /> */}
+    const [selected, setSelected] = useState(options[0]);
+    const [showDropdown, setShowDropdown] = useState(true);
 
-            {/* <button onClick={() => setShowDropdown(!showDropdown)}>
-                Toggle a Dropdown</button>
-            {showDropdown ?
-                <Dropdown
-                    selected={selected}
-                    options={options}
-                    onSelectChange={setSelected}
-                /> : null
-            } */}
-            <Translate />
+    return (
+
+        <div>
+            <Header />
+            <Route path="/">
+                <Accordion items={items} />
+            </Route>
+
+            <Route path="/list">
+                <Search />
+            </Route>
+
+            <Route path="/dropdown">
+                <button onClick={() => setShowDropdown(!showDropdown)}>
+                    Toggle a Dropdown</button>
+                {showDropdown ?
+                    <Dropdown
+                        label="Select a color"
+                        selected={selected}
+                        options={options}
+                        onSelectChange={setSelected} />
+                    : null}
+            </Route>
+
+            <Route path="/translate">
+                <Translate />
+            </Route>
         </div>
     );
 };
